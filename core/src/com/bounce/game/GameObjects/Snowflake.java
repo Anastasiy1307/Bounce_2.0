@@ -1,19 +1,21 @@
 package com.bounce.game.GameObjects;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.bounce.game.Levels.Loader;
 
+// 7
 public class Snowflake extends MainObject{
     private float speed;
     private Vector2 point1;
     private Vector2 point2;
-    public Snowflake(float x, float y, float width, float height, String texture, Vector2 point1, Vector2 point2) {
-        this.texture = new com.badlogic.gdx.graphics.Texture(texture);
-        this.texture.setFilter(com.badlogic.gdx.graphics.Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        rectangle = new Rectangle(x, y, width, height);
+    public Snowflake(float x, float y, float width, float height, Vector2 point1, Vector2 point2) {
+        super(x, y, width, height);
         this.point1 = point1;
         this.point2 = point2;
         speed = 100;
+    }
+    public void draw(SpriteBatch sb) {
+        sb.draw(Loader.textures[7], rectangle.x, rectangle.y, rectangle.width, rectangle.height);
     }
 }

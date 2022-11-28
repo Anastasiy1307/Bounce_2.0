@@ -1,15 +1,17 @@
 package com.bounce.game.GameObjects;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.bounce.game.Levels.Loader;
 
+// 1
 public class Block extends MainObject{
 
-    public Block(float x, float y, float width, float height, String texture){
-        this.texture = new com.badlogic.gdx.graphics.Texture(texture);
-        this.texture.setFilter(com.badlogic.gdx.graphics.Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        rectangle = new Rectangle(x, y, width, height);
+    public Block(float x, float y, float width, float height){
+        super(x, y, width, height);
+    }
 
+    public void draw(SpriteBatch sb) {
+        sb.draw(Loader.textures[0], rectangle.x, rectangle.y, rectangle.width, rectangle.height);
     }
 
 }
