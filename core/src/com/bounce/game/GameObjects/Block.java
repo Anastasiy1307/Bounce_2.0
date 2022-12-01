@@ -11,7 +11,7 @@ public class Block extends MainObject{
     }
 
     public void draw(SpriteBatch sb) {
-        sb.draw(Loader.textures[0], rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+        sb.draw(Loader.textures[1], rectangle.x, rectangle.y, rectangle.width, rectangle.height);
     }
 
 }
