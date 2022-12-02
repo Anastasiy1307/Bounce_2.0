@@ -12,7 +12,7 @@ public class Loader {
 
     public static void create() {
         levelNumber = 1;
-        textures = new Texture[30];
+        textures = new Texture[33];
         textures[0] = null;
         textures[1] = new Texture("1.png");
         //...
