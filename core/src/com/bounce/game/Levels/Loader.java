@@ -14,9 +14,8 @@ public class Loader {
         levelNumber = 1;
         textures = new Texture[33];
         textures[0] = null;
-        textures[1] = new Texture("1.png");
-        //...
         for (int i = 1; i < textures.length; i++) {
+            textures[i] = new Texture(i + ".png");
             textures[i].setFilter(com.badlogic.gdx.graphics.Texture.TextureFilter.Linear, com.badlogic.gdx.graphics.Texture.TextureFilter.Linear);
         }
     }
@@ -36,11 +35,14 @@ public class Loader {
             case 10: level = new Level_10(); break;
             case 11: level = new Level_11(); break;*/
         }
+
         map = new MainObject[level.map.length][level.map[0].length];
         for (int i = 0; i < level.map.length; i++) {
             for (int j = 0; j < level.map[i].length; j++) {
                 switch (level.map[i][j]) {
-                    case 1: map[i][j] = new Block(i*size, j*size, size, size); break;
+                    case 1: map[i][j] = new Block(i*size, j*size, size, size, 1); break;
+                    case 2: map[i][j] = new Block(i*size, j*size, size, size, 2); break;
+                    case 3: map[i][j] = new Block(i*size, j*size, size, size, 3); break;
                     //...
                 }
             }
