@@ -57,4 +57,7 @@ public class Ball {
         texture.getTexture().dispose();
     }
 
+    public Circle getCircle() {
+        return circle;
+    }
 }

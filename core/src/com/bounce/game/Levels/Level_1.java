@@ -1,5 +1,9 @@
 package com.bounce.game.Levels;
 
+import com.bounce.game.GameObjects.Exit;
+
+import java.awt.Point;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Level_1 extends Level {
@@ -41,5 +45,9 @@ public class Level_1 extends Level {
         set(105,2,106,2,1);
         set(110,3,111,6,1);
         //...
+        snowflakes = new ArrayList<>();
+        //...
+        exit = new Exit(55, 110, 110, 110);
+        ballPosition = new Point(60,60);
     }
 }

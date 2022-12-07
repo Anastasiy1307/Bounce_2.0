@@ -15,4 +15,11 @@ public abstract class MainObject {
 
     public abstract void draw(SpriteBatch sb);
 
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
+
+    public int getType() {
+        return type;
+    }
 }

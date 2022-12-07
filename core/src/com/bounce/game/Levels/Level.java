@@ -1,7 +1,16 @@
 package com.bounce.game.Levels;
 
+import com.bounce.game.GameObjects.Exit;
+import com.bounce.game.GameObjects.Snowflake;
+
+import java.awt.Point;
+import java.util.ArrayList;
+
 public abstract class Level {
     protected int[][] map;
+    protected ArrayList<Snowflake> snowflakes;
+    protected Exit exit;
+    protected Point ballPosition;
 
     protected void set(int x, int y, int value) {
         map[x][y] = value;
