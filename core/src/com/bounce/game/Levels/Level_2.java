@@ -53,11 +53,7 @@ public class Level_2 extends Level {
         set(134,1,134,1,25);
         set(133,4,135,4,1);
         set(136,0,137,22,1);
-        set(131,8,132,8,1);
         set(130,9,131,9,1);
-        set(129,10,130,10,1);
-        set(128,11,127,11,1);
-
         //...
         snowflakes = new ArrayList<>();
         snowflakes.add(new Snowflake(2,1,110,110,new Point(110,55),new Point(110,330)));
