@@ -1,11 +1,8 @@
 package com.bounce.game.States;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.bounce.game.GameObjects.Ball;
-import com.bounce.game.GameObjects.Button;
-import com.bounce.game.GameObjects.Texture;
+import com.bounce.game.Controls.Texture;
 
 public class StartMenu extends State {
 

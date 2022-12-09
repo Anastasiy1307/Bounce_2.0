@@ -11,6 +11,8 @@ public abstract class Level {
     protected ArrayList<Snowflake> snowflakes;
     protected Exit exit;
     protected Point ballPosition;
+    protected int numberOfLives;
+    protected int numberOfRings;
 
     protected void set(int x, int y, int value) {
         map[x][y] = value;

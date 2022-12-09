@@ -28,7 +28,7 @@ public class Snowflake extends MainObject{
         } else {
             if (rectangle.x > point1.x) rectangle.x -= speed*dt;
             if (rectangle.y > point1.y) rectangle.y -= speed*dt;
-            if (rectangle.x <= point2.x && rectangle.y <= point2.y) direction = 1;
+            if (rectangle.x <= point1.x && rectangle.y <= point1.y) direction = 1;
         }
     }
 

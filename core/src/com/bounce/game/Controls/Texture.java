@@ -1,4 +1,4 @@
-package com.bounce.game.GameObjects;
+package com.bounce.game.Controls;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
