@@ -21,11 +21,15 @@ public class Loader {
     public static ArrayList<Snowflake> snowflakes;
     public static Exit exit;
     public static Point ballPosition;
+    public static int numberOfLives;
+    public static int numberOfRings;
+    public static int numberOfPoints;
     public static Texture[] textures;
     public static final int size = 55;
 
     public static void create() {
         levelNumber = 2;
+        numberOfPoints = 0;
         textures = new Texture[36];
         textures[0] = null;
         for (int i = 1; i < textures.length; i++) {
@@ -89,5 +93,7 @@ public class Loader {
         snowflakes = level.snowflakes;
         exit = level.exit;
         ballPosition = level.ballPosition;
+        numberOfLives = level.numberOfLives;
+        numberOfRings = level.numberOfRings;
     }
 }

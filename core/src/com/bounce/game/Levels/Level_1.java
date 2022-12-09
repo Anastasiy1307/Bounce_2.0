@@ -60,6 +60,8 @@ public class Level_1 extends Level {
         snowflakes = new ArrayList<>();
         //...
         exit = new Exit(6050, 55, 110, 110);
-        ballPosition = new Point(60,60);
+        ballPosition = new Point(150,150);
+        numberOfLives = 3;
+        numberOfRings = 6;
     }
 }

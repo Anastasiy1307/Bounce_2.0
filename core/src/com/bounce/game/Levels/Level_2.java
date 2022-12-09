@@ -61,5 +61,7 @@ public class Level_2 extends Level {
         //...
         exit = new Exit(55, 110, 110, 110);
         ballPosition = new Point(60,60);
+        numberOfLives = 3;
+        numberOfRings = 8;
     }
 }
