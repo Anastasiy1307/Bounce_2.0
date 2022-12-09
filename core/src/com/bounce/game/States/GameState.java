@@ -14,7 +14,9 @@ public class GameState extends State {
     public GameState(GameStateManager gsm) {
         super(gsm);
         camera.setToOrtho(false, 1080, 540);
-        camera.position.set(Loader.ballPosition.x, Loader.ballPosition.y, 0);
+        camera.zoom = 0.815f;
+        camera.position.set(Math.min(Math.max(Loader.ballPosition.x, camera.viewportWidth/2*camera.zoom), Loader.map.length*Loader.size - camera.viewportWidth/2*camera.zoom),
+                Math.min(Math.max(Loader.ballPosition.y, camera.viewportHeight/2*camera.zoom), Loader.map[0].length*Loader.size - camera.viewportHeight/2*camera.zoom), 0);
         ball = new Ball("ball.png", Loader.ballPosition.x, Loader.ballPosition.y, 27);
     }
 
@@ -32,6 +34,11 @@ public class GameState extends State {
             snowflake.update(dt);
         }
         ball.update(dt);
+        float offsetX = Math.min((camera.viewportWidth/2) / Math.abs(ball.getCircle().x - camera.position.x), 3) * (ball.getCircle().x - camera.position.x) * dt;
+        float offsetY = Math.min((camera.viewportHeight/2) / Math.abs(ball.getCircle().y - camera.position.y), 3) * (ball.getCircle().y - camera.position.y) * dt;
+        camera.translate(offsetX, offsetY);
+        camera.position.set(Math.min(Math.max(camera.position.x, camera.viewportWidth/2*camera.zoom), Loader.map.length*Loader.size - camera.viewportWidth/2*camera.zoom),
+                Math.min(Math.max(camera.position.y, camera.viewportHeight/2*camera.zoom), Loader.map[0].length*Loader.size - camera.viewportHeight/2*camera.zoom), 0);
     }
 
     @Override
@@ -54,7 +61,6 @@ public class GameState extends State {
         Loader.exit.draw(sb);
         ball.draw(sb);
         sb.end();
-        camera.translate(ball.getCircle().x - camera.position.x, ball.getCircle().y - camera.position.y);
     }
 
     @Override

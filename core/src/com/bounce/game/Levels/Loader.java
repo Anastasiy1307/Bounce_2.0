@@ -5,6 +5,7 @@ import com.bounce.game.GameObjects.Block;
 import com.bounce.game.GameObjects.Checkpoint;
 import com.bounce.game.GameObjects.Cutting;
 import com.bounce.game.GameObjects.Exit;
+import com.bounce.game.GameObjects.ExtraLife;
 import com.bounce.game.GameObjects.MainObject;
 import com.bounce.game.GameObjects.Rise;
 import com.bounce.game.GameObjects.Snowflake;
@@ -21,11 +22,11 @@ public class Loader {
     public static Exit exit;
     public static Point ballPosition;
     public static Texture[] textures;
-    private static final int size = 55;
+    public static final int size = 55;
 
     public static void create() {
-        levelNumber = 1;
-        textures = new Texture[35];
+        levelNumber = 2;
+        textures = new Texture[36];
         textures[0] = null;
         for (int i = 1; i < textures.length; i++) {
             textures[i] = new Texture(i + ".png");
@@ -81,7 +82,7 @@ public class Loader {
                     case 27: map[i][j] = new Spike(i*size+11, j*size, 33, size, 3); break;
                     case 28: map[i][j] = new Spike(i*size, j*size+11, size, 33, 4); break;
                     case 29: map[i][j] = new Checkpoint(i*size, j*size, size, size); break;
-                    //...
+                    case 35: map[i][j] = new ExtraLife(i*size+5, j*size+5, 45, 45); break;
                 }
             }
         }

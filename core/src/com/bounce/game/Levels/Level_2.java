@@ -56,8 +56,8 @@ public class Level_2 extends Level {
         set(130,9,131,9,1);
         //...
         snowflakes = new ArrayList<>();
-        snowflakes.add(new Snowflake(2,1,110,110,new Point(110,55),new Point(110,330)));
-        snowflakes.add(new Snowflake(4,1,110,110,new Point(110,55),new Point(110,330)));
+        snowflakes.add(new Snowflake(2*55,55,110,110,new Point(110,55),new Point(110,275)));
+        snowflakes.add(new Snowflake(4*55,55,110,110,new Point(220,55),new Point(220,275)));
         //...
         exit = new Exit(55, 110, 110, 110);
         ballPosition = new Point(60,60);
