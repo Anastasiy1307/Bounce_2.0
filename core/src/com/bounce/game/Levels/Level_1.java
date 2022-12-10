@@ -1,5 +1,6 @@
 package com.bounce.game.Levels;
 
+import com.badlogic.gdx.math.Vector2;
 import com.bounce.game.GameObjects.Exit;
 
 import java.awt.Point;
@@ -60,7 +61,7 @@ public class Level_1 extends Level {
         snowflakes = new ArrayList<>();
         //...
         exit = new Exit(6050, 55, 110, 110);
-        ballPosition = new Point(150,150);
+        ballPosition = new Vector2(150,150);
         numberOfLives = 3;
         numberOfRings = 6;
     }

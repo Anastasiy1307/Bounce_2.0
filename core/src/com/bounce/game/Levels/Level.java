@@ -1,5 +1,6 @@
 package com.bounce.game.Levels;
 
+import com.badlogic.gdx.math.Vector2;
 import com.bounce.game.GameObjects.Exit;
 import com.bounce.game.GameObjects.Snowflake;
 
@@ -10,7 +11,7 @@ public abstract class Level {
     protected int[][] map;
     protected ArrayList<Snowflake> snowflakes;
     protected Exit exit;
-    protected Point ballPosition;
+    protected Vector2 ballPosition;
     protected int numberOfLives;
     protected int numberOfRings;
 

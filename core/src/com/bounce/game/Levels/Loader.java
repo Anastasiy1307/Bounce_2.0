@@ -1,6 +1,7 @@
 package com.bounce.game.Levels;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 import com.bounce.game.GameObjects.Block;
 import com.bounce.game.GameObjects.Checkpoint;
 import com.bounce.game.GameObjects.Cutting;
@@ -20,7 +21,7 @@ public class Loader {
     public static MainObject[][] map;
     public static ArrayList<Snowflake> snowflakes;
     public static Exit exit;
-    public static Point ballPosition;
+    public static Vector2 ballPosition;
     public static int numberOfLives;
     public static int numberOfRings;
     public static int numberOfPoints;

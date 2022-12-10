@@ -1,5 +1,6 @@
 package com.bounce.game.Levels;
 
+import com.badlogic.gdx.math.Vector2;
 import com.bounce.game.GameObjects.Exit;
 import com.bounce.game.GameObjects.Snowflake;
 
@@ -73,11 +74,11 @@ public class Level_2 extends Level {
         set(114,21,137,21,1);
         //...
         snowflakes = new ArrayList<>();
-        snowflakes.add(new Snowflake(2*55,55,110,110,new Point(110,55),new Point(110,275)));
-        snowflakes.add(new Snowflake(4*55,55,110,110,new Point(220,55),new Point(220,275)));
+        snowflakes.add(new Snowflake(2*55,55,110,110,new Vector2(110,55),new Vector2(110,275)));
+        snowflakes.add(new Snowflake(4*55,55,110,110,new Vector2(220,55),new Vector2(220,275)));
         //...
         exit = new Exit(7480, 825, 110, 110);
-        ballPosition = new Point(500,260);
+        ballPosition = new Vector2(500,260);
         numberOfLives = 3;
         numberOfRings = 8;
     }
