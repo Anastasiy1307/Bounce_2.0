@@ -44,8 +44,8 @@ public class Loader {
         switch (levelNumber) {
             case 1: level = new Level_1(); break;
             case 2: level = new Level_2(); break;
-            /*case 3: level = new Level_3(); break;
-            case 4: level = new Level_4(); break;
+            case 3: level = new Level_3(); break;
+            /*case 4: level = new Level_4(); break;
             case 5: level = new Level_5(); break;
             case 6: level = new Level_6(); break;
             case 7: level = new Level_7(); break;
