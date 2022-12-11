@@ -29,7 +29,7 @@ public class Level_1 extends Level {
         set(33,2,34,2,1);
         set(36,1,36,1,25);
         set(38,3,41,3,1);
-        set(40,2,41,2,1);
+        set(40,1,41,2,1);
         set(44,3,45,7,1);
         set(46,6,46,7,1);
         set(47,7,64,7,1);
@@ -61,7 +61,7 @@ public class Level_1 extends Level {
         snowflakes = new ArrayList<>();
         //...
         exit = new Exit(6050, 55, 110, 110);
-        ballPosition = new Vector2(150,150);
+        ballPosition = new Vector2(110,330);
         numberOfLives = 3;
         numberOfRings = 6;
     }
