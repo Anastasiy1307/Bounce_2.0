@@ -78,6 +78,12 @@ public class Level_2 extends Level {
         snowflakes = new ArrayList<>();
         snowflakes.add(new Snowflake(2*55,55,110,110,new Vector2(110,55),new Vector2(110,275)));
         snowflakes.add(new Snowflake(4*55,55,110,110,new Vector2(220,55),new Vector2(220,275)));
+
+        snowflakes.add(new Snowflake(61*55,55,110,110,new Vector2(3355,55),new Vector2(110,275)));
+        snowflakes.add(new Snowflake(55*55,55,110,110,new Vector2(3025,55),new Vector2(220,275)));
+        snowflakes.add(new Snowflake(49*55,55,110,110,new Vector2(2695,55),new Vector2(220,275)));
+
+        snowflakes.add(new Snowflake(97*55,55,110,110,new Vector2(5335,55),new Vector2(220,275)));
         //...
         exit = new Exit(7480, 825, 110, 110);
         ballPosition = new Vector2(500,260);
