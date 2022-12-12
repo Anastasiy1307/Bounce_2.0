@@ -30,7 +30,7 @@ public class Level_3 extends Level{
         set(13,23,5);
         set(12,24,5);
         //...
-
+        snowflakes = new ArrayList<>();
         //...
         exit = new Exit(150, 150, 110, 110);
         ballPosition = new Vector2(150,150);

@@ -10,22 +10,28 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Ball {
     private Sprite texture;
+    private Sprite textureBig;
     private Circle circle;
     private Rectangle rectangle;
     private Vector2 speed;
     private final float gravity;
     private final float friction;
     private boolean isStand;
+    private int type;
+    private int degrees;
 
-    public Ball (String texture, float x, float y, float radius) {
-        this.texture = new Sprite(new Texture(texture));
+    public Ball (String texture, String textureBig, float x, float y, float radius) {
+        this.texture = new Sprite(new Texture(texture), (int)radius*2, (int)radius*2);
+        this.textureBig = new Sprite(new Texture(textureBig), (int)radius*3, (int)radius*3);
         this.texture.getTexture().setFilter(com.badlogic.gdx.graphics.Texture.TextureFilter.Linear, com.badlogic.gdx.graphics.Texture.TextureFilter.Linear);
+        this.textureBig.getTexture().setFilter(com.badlogic.gdx.graphics.Texture.TextureFilter.Linear, com.badlogic.gdx.graphics.Texture.TextureFilter.Linear);
         circle = new Circle(x, y, radius);
         rectangle = new Rectangle(x,y,radius*2, radius*2);
         speed = new Vector2(0,0);
         gravity = 10;
         friction = 20;
         isStand = false;
+        type = 1;
     }
 
     public void update(float dt) {
@@ -37,8 +43,13 @@ public class Ball {
         rectangle.y += speed.y * dt;
         circle.x = rectangle.x;
         circle.y = rectangle.y;
-       /* texture.setOrigin(27,27);
-        texture.setRotation(90);*/
+        degrees = (degrees - (int)((speed.x * dt) * (360/(2*Math.PI*circle.radius)))) % 360;
+        texture.setPosition(rectangle.x, rectangle.y);
+        textureBig.setPosition(rectangle.x, rectangle.y);
+        texture.setOriginCenter();
+        textureBig.setOriginCenter();
+        texture.setRotation(degrees);
+        textureBig.setRotation(degrees);
     }
 
     public void moveLeft() {
@@ -54,7 +65,8 @@ public class Ball {
     }
 
     public void draw(SpriteBatch sb) {
-        sb.draw(texture, circle.x, circle.y, circle.radius*2, circle.radius*2);
+        if (type == 1) texture.draw(sb);
+        else textureBig.draw(sb);
     }
 
     public void dispose() {
@@ -75,5 +87,17 @@ public class Ball {
 
     public void stand() {
         isStand = true;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public Sprite getTexture() {
+        return texture;
+    }
+
+    public Sprite getTextureBig() {
+        return textureBig;
     }
 }

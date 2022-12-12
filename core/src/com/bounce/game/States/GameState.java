@@ -21,7 +21,7 @@ public class GameState extends State {
         camera.zoom = 0.815f;
         camera.position.set(Math.min(Math.max(Loader.ballPosition.x, camera.viewportWidth/2*camera.zoom), Loader.map.length*Loader.size - camera.viewportWidth/2*camera.zoom),
                 Math.min(Math.max(Loader.ballPosition.y, camera.viewportHeight/2*camera.zoom), Loader.map[0].length*Loader.size - camera.viewportHeight/2*camera.zoom), 0);
-        ball = new Ball("ball.png", Loader.ballPosition.x, Loader.ballPosition.y, 27);
+        ball = new Ball("ball_54x54.png", "ball_81x81.png", Loader.ballPosition.x, Loader.ballPosition.y, 27);
         collisions = new Collisions();
         left = new Button(40/camera.zoom,30/camera.zoom,82,82,"Left.png");
         right = new Button(135/camera.zoom,30/camera.zoom,82,82,"Right.png");

@@ -42,19 +42,27 @@ public class Collisions {
             if (ball.getRectangle().x + ball.getRectangle().width - object.getRectangle().x < Math.abs(ball.getSpeed().x * dt) + 0.01) {
                 ball.getRectangle().x = object.getRectangle().x - ball.getRectangle().width;
                 ball.getCircle().x = object.getRectangle().x - ball.getRectangle().width;
+                ball.getTexture().setX(object.getRectangle().x - ball.getRectangle().width);
+                ball.getTextureBig().setX(object.getRectangle().x - ball.getRectangle().width);
                 ball.getSpeed().x = 0;
             } else if (object.getRectangle().x + object.getRectangle().width - ball.getRectangle().x < Math.abs(ball.getSpeed().x * dt) + 0.01) {
                 ball.getRectangle().x = object.getRectangle().x + object.getRectangle().width;
                 ball.getCircle().x = object.getRectangle().x + object.getRectangle().width;
+                ball.getTexture().setX(object.getRectangle().x + object.getRectangle().width);
+                ball.getTextureBig().setX(object.getRectangle().x + object.getRectangle().width);
                 ball.getSpeed().x = 0;
             } else if (object.getRectangle().y + object.getRectangle().height - ball.getRectangle().y < Math.abs(ball.getSpeed().y * dt) + 0.01) {
                 ball.getRectangle().y = object.getRectangle().y + object.getRectangle().height;
                 ball.getCircle().y = object.getRectangle().y + object.getRectangle().height;
+                ball.getTexture().setY(object.getRectangle().y + object.getRectangle().height);
+                ball.getTextureBig().setY(object.getRectangle().y + object.getRectangle().height);
                 ball.stand();
                 ball.getSpeed().y = Math.abs(ball.getSpeed().y) > 300? Math.abs(ball.getSpeed().y) / 2.5f: 0;
             } else if (ball.getRectangle().y + ball.getRectangle().height - object.getRectangle().y < Math.abs(ball.getSpeed().y * dt) + 0.01) {
                 ball.getRectangle().y = object.getRectangle().y - ball.getRectangle().height;
                 ball.getCircle().y = object.getRectangle().y - ball.getRectangle().height;
+                ball.getTexture().setY(object.getRectangle().y - ball.getRectangle().height);
+                ball.getTextureBig().setY(object.getRectangle().y - ball.getRectangle().height);
                 ball.getSpeed().y = 0;
             }
         }
@@ -83,6 +91,7 @@ public class Collisions {
             ball.getCircle().radius = ball.getCircle().radius*1.5f;
             ball.getRectangle().width = ball.getRectangle().width*1.5f;
             ball.getRectangle().height = ball.getRectangle().height*1.5f;
+            ball.setType(2);
         }
     }
 
@@ -91,6 +100,7 @@ public class Collisions {
             ball.getCircle().radius = ball.getCircle().radius/1.5f;
             ball.getRectangle().width = ball.getRectangle().width/1.5f;
             ball.getRectangle().height = ball.getRectangle().height/1.5f;
+            ball.setType(1);
         }
     }
 
