@@ -1,6 +1,5 @@
 package com.bounce.game.GameObjects;
 
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -12,7 +11,6 @@ public class Ball {
     private Sprite texture;
     private Sprite textureBig;
     private Circle circle;
-    private Rectangle rectangle;
     private Vector2 speed;
     private final float gravity;
     private final float friction;
@@ -23,10 +21,9 @@ public class Ball {
     public Ball (String texture, String textureBig, float x, float y, float radius) {
         this.texture = new Sprite(new Texture(texture), (int)radius*2, (int)radius*2);
         this.textureBig = new Sprite(new Texture(textureBig), (int)radius*3, (int)radius*3);
-        this.texture.getTexture().setFilter(com.badlogic.gdx.graphics.Texture.TextureFilter.Linear, com.badlogic.gdx.graphics.Texture.TextureFilter.Linear);
-        this.textureBig.getTexture().setFilter(com.badlogic.gdx.graphics.Texture.TextureFilter.Linear, com.badlogic.gdx.graphics.Texture.TextureFilter.Linear);
+        this.texture.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        this.textureBig.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         circle = new Circle(x, y, radius);
-        rectangle = new Rectangle(x,y,radius*2, radius*2);
         speed = new Vector2(0,0);
         gravity = 10;
         friction = 20;
@@ -39,13 +36,11 @@ public class Ball {
         if (speed.x < 0) speed.x += friction;
         if (!isStand) speed.y -= gravity;
         isStand = false;
-        rectangle.x += speed.x * dt;
-        rectangle.y += speed.y * dt;
-        circle.x = rectangle.x;
-        circle.y = rectangle.y;
+        circle.x += speed.x * dt;
+        circle.y += speed.y * dt;
         degrees = (degrees - (int)((speed.x * dt) * (360/(2*Math.PI*circle.radius)))) % 360;
-        texture.setPosition(rectangle.x, rectangle.y);
-        textureBig.setPosition(rectangle.x, rectangle.y);
+        texture.setPosition(circle.x, circle.y);
+        textureBig.setPosition(circle.x, circle.y);
         texture.setOriginCenter();
         textureBig.setOriginCenter();
         texture.setRotation(degrees);
@@ -53,15 +48,52 @@ public class Ball {
     }
 
     public void moveLeft() {
-        speed.x = -300;
+        speed.x -= 40;
+        if (speed.x < -400) speed.x = -400;
     }
 
     public void moveRight() {
-        speed.x = 300;
+        speed.x += 40;
+        if (speed.x > 400) speed.x = 400;
     }
 
     public void jump() {
-        if (isStand) speed.y = 600;
+        if (isStand) speed.y = 550;
+    }
+
+    public boolean overlaps(Rectangle rectangle) {
+        return (circle.x + circle.radius > rectangle.x && circle.x + circle.radius < rectangle.x + rectangle.width &&
+                circle.y + circle.radius*2 > rectangle.y && circle.y < rectangle.y + rectangle.height) ||
+               (circle.y + circle.radius > rectangle.y && circle.y + circle.radius < rectangle.y + rectangle.height &&
+                circle.x + circle.radius*2 > rectangle.x && circle.x < rectangle.x + rectangle.width) ||
+               (circle.x + circle.radius < rectangle.x && circle.y + circle.radius < rectangle.y &&
+                Math.sqrt(Math.pow(circle.x + circle.radius - rectangle.x, 2) + Math.pow(circle.y + circle.radius - rectangle.y, 2)) < circle.radius) ||
+               (circle.x + circle.radius > rectangle.x + rectangle.width && circle.y + circle.radius < rectangle.y &&
+                Math.sqrt(Math.pow(circle.x + circle.radius - rectangle.x - rectangle.width, 2) + Math.pow(circle.y + circle.radius - rectangle.y, 2)) < circle.radius) ||
+               (circle.x + circle.radius > rectangle.x + rectangle.width && circle.y + circle.radius > rectangle.y + rectangle.height &&
+                Math.sqrt(Math.pow(circle.x + circle.radius - rectangle.x - rectangle.width, 2) + Math.pow(circle.y + circle.radius - rectangle.y - rectangle.height, 2)) < circle.radius) ||
+               (circle.x + circle.radius < rectangle.x && circle.y + circle.radius > rectangle.y + rectangle.height &&
+                Math.sqrt(Math.pow(circle.x + circle.radius - rectangle.x, 2) + Math.pow(circle.y + circle.radius - rectangle.y - rectangle.height, 2)) < circle.radius);
+    }
+
+    public boolean overlapsLoverLeftCorner(Rectangle rectangle) {
+        return circle.x + circle.radius < rectangle.x && circle.y + circle.radius < rectangle.y &&
+                Math.sqrt(Math.pow(circle.x + circle.radius - rectangle.x, 2) + Math.pow(circle.y + circle.radius - rectangle.y, 2)) < circle.radius;
+    }
+
+    public boolean overlapsLoverRightCorner(Rectangle rectangle) {
+        return circle.x + circle.radius > rectangle.x + rectangle.width && circle.y + circle.radius < rectangle.y &&
+                Math.sqrt(Math.pow(circle.x + circle.radius - rectangle.x - rectangle.width, 2) + Math.pow(circle.y + circle.radius - rectangle.y, 2)) < circle.radius;
+    }
+
+    public boolean overlapsUpperRightCorner(Rectangle rectangle) {
+        return circle.x + circle.radius > rectangle.x + rectangle.width && circle.y + circle.radius > rectangle.y + rectangle.height &&
+                Math.sqrt(Math.pow(circle.x + circle.radius - rectangle.x - rectangle.width, 2) + Math.pow(circle.y + circle.radius - rectangle.y - rectangle.height, 2)) < circle.radius;
+    }
+
+    public boolean overlapsUpperLeftCorner(Rectangle rectangle) {
+        return circle.x + circle.radius < rectangle.x && circle.y + circle.radius > rectangle.y + rectangle.height &&
+                Math.sqrt(Math.pow(circle.x + circle.radius - rectangle.x, 2) + Math.pow(circle.y + circle.radius - rectangle.y - rectangle.height, 2)) < circle.radius;
     }
 
     public void draw(SpriteBatch sb) {
@@ -75,10 +107,6 @@ public class Ball {
 
     public Circle getCircle() {
         return circle;
-    }
-
-    public Rectangle getRectangle() {
-        return rectangle;
     }
 
     public Vector2 getSpeed() {

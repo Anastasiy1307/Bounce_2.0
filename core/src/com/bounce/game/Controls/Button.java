@@ -14,6 +14,10 @@ public class Button {
     private boolean isClick;
     private float x, y;
 
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
+
     public Button(float x, float y, float width, float height, String texture) {
         this.texture = new com.badlogic.gdx.graphics.Texture(texture);
         this.texture.setFilter(com.badlogic.gdx.graphics.Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
