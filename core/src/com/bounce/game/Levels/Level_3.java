@@ -16,11 +16,12 @@ public class Level_3 extends Level{
 
         set(0,35,138,35,1);
         set(0,21,32,21,1);
+        set(0,21,1,35,1);
         set(6,24,27);
         set(6,25,7,25,1);
         set(0,28,4,28,1);
-        set(3,34,27);
-        set(3,34,27);
+        set(2,34,27);
+        set(4,34,27);
         set(8,34,35);
         set(10,21,11,24,1);
         set(10,28,11,34,1);
@@ -28,12 +29,26 @@ public class Level_3 extends Level{
         set(13,21,13,22,1);
         set(12,24,5);
         set(13,23,5);
-        set(12,24,5);
+        set(14,22,5);
+        set(19,22,4);
+        set(20,23,4);
+        set(21,24,4);
+        set(20,22,25,22,1);
+        set(21,23,25,23,1);
+        set(22,24,25,24,1);
+        set(15,22,18,24,2);
+        set(14,23,14,24,2);
+        set(13,24,13,24,2);
+        set(19,23,19,24,2);
+        set(20,24,2);
+        set(31,22,32,23,1);
+        set(31,26,32,27,1);
+        set(12,28,12,31,1);
         //...
         snowflakes = new ArrayList<>();
         //...
-        exit = new Exit(150, 150, 110, 110);
-        ballPosition = new Vector2(150,150);
+        exit = new Exit(40, 40, 110, 110);
+        ballPosition = new Vector2(110,1400);
         numberOfLives = 3;
         numberOfRings = 8;
     }
