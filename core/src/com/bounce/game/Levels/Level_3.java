@@ -44,12 +44,30 @@ public class Level_3 extends Level{
         set(31,22,32,23,1);
         set(31,26,32,27,1);
         set(12,28,12,31,1);
+        set(13,28,13,30,1);
+        set(14,28,14,29,1);
+        set(15,28,1);
+        set(12,32,5);
+        set(13,31,5);
+        set(14,30,5);
+        set(15,29,5);
+        set(12,34,29);
+        set(18,29,4);
+        set(18,28,1);
+        set(19,30,4);
+        set(20,31,4);
+        set(21,32,4);
+        set(19,28,19,29,1);
+        set(20,28,20,30,1);
+        set(21,28,21,31,1);
+        set(22,28,23,32,1);
+        set(23,28,69,28,1);
         //...
         snowflakes = new ArrayList<>();
         //...
         rings = new ArrayList<>();
-        exit = new Exit(40, 40, 110, 110);
-        ballPosition = new Vector2(110,1400);
+        exit = new Exit(3190, 1595, 110, 110);
+        ballPosition = new Vector2(3190,1850);
         numberOfLives = 3;
         numberOfRings = 8;
     }
