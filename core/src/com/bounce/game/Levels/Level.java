@@ -2,6 +2,7 @@ package com.bounce.game.Levels;
 
 import com.badlogic.gdx.math.Vector2;
 import com.bounce.game.GameObjects.Exit;
+import com.bounce.game.GameObjects.Ring;
 import com.bounce.game.GameObjects.Snowflake;
 
 import java.awt.Point;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 public abstract class Level {
     protected int[][] map;
     protected ArrayList<Snowflake> snowflakes;
+    protected ArrayList<Ring> rings;
     protected Exit exit;
     protected Vector2 ballPosition;
     protected int numberOfLives;

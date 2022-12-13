@@ -2,6 +2,7 @@ package com.bounce.game.Levels;
 
 import com.badlogic.gdx.math.Vector2;
 import com.bounce.game.GameObjects.Exit;
+import com.bounce.game.GameObjects.Ring;
 
 import java.awt.Point;
 import java.util.ArrayList;
@@ -59,6 +60,9 @@ public class Level_1 extends Level {
         set(110,3,111,6,1);
         //...
         snowflakes = new ArrayList<>();
+        //...
+        rings = new ArrayList<>();
+        rings.add(new Ring(9*55+12, 55+15, 30, 80, 1));
         //...
         exit = new Exit(6050, 55, 110, 110);
         ballPosition = new Vector2(110,330);

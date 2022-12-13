@@ -47,6 +47,7 @@ public class Level_3 extends Level{
         //...
         snowflakes = new ArrayList<>();
         //...
+        rings = new ArrayList<>();
         exit = new Exit(40, 40, 110, 110);
         ballPosition = new Vector2(110,1400);
         numberOfLives = 3;

@@ -2,18 +2,24 @@ package com.bounce.game.States;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bounce.game.Controls.Button;
 import com.bounce.game.Controls.Collisions;
 import com.bounce.game.GameObjects.Ball;
+import com.bounce.game.GameObjects.Ring;
 import com.bounce.game.GameObjects.Snowflake;
 import com.bounce.game.Levels.Loader;
+
+import java.util.ArrayList;
 
 public class GameState extends State {
 
     Ball ball;
     Collisions collisions;
     Button left, right, up;
+    Texture life, X, ring;
+    ArrayList<Texture> numbers;
 
     public GameState(GameStateManager gsm) {
         super(gsm);
@@ -26,6 +32,17 @@ public class GameState extends State {
         left = new Button(40/camera.zoom,30/camera.zoom,82,82,"Left.png");
         right = new Button(135/camera.zoom,30/camera.zoom,82,82,"Right.png");
         up = new Button(925*camera.zoom,30/camera.zoom,82,82,"Up.png");
+        life = new Texture("ball.png");
+        life.setFilter(com.badlogic.gdx.graphics.Texture.TextureFilter.Linear, com.badlogic.gdx.graphics.Texture.TextureFilter.Linear);
+        X = new Texture("X.png");
+        X.setFilter(com.badlogic.gdx.graphics.Texture.TextureFilter.Linear, com.badlogic.gdx.graphics.Texture.TextureFilter.Linear);
+        numbers = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            numbers.add(new Texture("num_" + i + ".png"));
+            numbers.get(i).setFilter(com.badlogic.gdx.graphics.Texture.TextureFilter.Linear, com.badlogic.gdx.graphics.Texture.TextureFilter.Linear);
+        }
+        ring = new Texture("ring_for_count.png");
+        ring.setFilter(com.badlogic.gdx.graphics.Texture.TextureFilter.Linear, com.badlogic.gdx.graphics.Texture.TextureFilter.Linear);
     }
 
     @Override
@@ -70,11 +87,20 @@ public class GameState extends State {
         for (Snowflake snowflake: Loader.snowflakes) {
             snowflake.draw(sb);
         }
+        for (Ring ring: Loader.rings) {
+            ring.draw(sb);
+        }
         Loader.exit.draw(sb);
         ball.draw(sb);
         left.draw(sb);
         right.draw(sb);
         up.draw(sb);
+        sb.draw(life, camera.position.x - camera.viewportWidth/2 + 115, camera.position.y - camera.viewportHeight/2 + 445, 30,30);
+        sb.draw(X, camera.position.x - camera.viewportWidth/2 + 150, camera.position.y - camera.viewportHeight/2 + 440, 30,35);
+        sb.draw(numbers.get(Loader.numberOfLives), camera.position.x - camera.viewportWidth/2 + 182, camera.position.y - camera.viewportHeight/2 + 440, 30,35);
+        for (int i = 0; i < Loader.numberOfRings; i++) {
+            sb.draw(ring, camera.position.x - camera.viewportWidth/2 + 220 + i*18, camera.position.y - camera.viewportHeight/2 + 445, 15,30);
+        }
         sb.end();
     }
 

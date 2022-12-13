@@ -6,6 +6,7 @@ import com.bounce.game.GameObjects.Checkpoint;
 import com.bounce.game.GameObjects.Cutting;
 import com.bounce.game.GameObjects.ExtraLife;
 import com.bounce.game.GameObjects.MainObject;
+import com.bounce.game.GameObjects.Ring;
 import com.bounce.game.GameObjects.Rise;
 import com.bounce.game.GameObjects.Snowflake;
 import com.bounce.game.GameObjects.Spike;
@@ -27,12 +28,15 @@ public class Collisions {
                     if (Loader.map[i][j] instanceof Checkpoint && Loader.map[i][j].getType() == 1) collisionCheckpoint(Loader.map[i][j], ball);
                     if (Loader.map[i][j] instanceof Rise) { collisionRise(Loader.map[i][j], ball); collisionRectangle(Loader.map[i][j], ball, dt);}
                     if (Loader.map[i][j] instanceof Cutting) { collisionCutting(Loader.map[i][j], ball); collisionRectangle(Loader.map[i][j], ball, dt);}
-                    if (Loader.map[i][j] instanceof ExtraLife && ball.overlaps(Loader.map[i][j].getRectangle())) { Loader.numberOfLives++; Loader.map[i][j] = null;}
+                    if (Loader.map[i][j] instanceof ExtraLife && ball.overlaps(Loader.map[i][j].getRectangle())) { Loader.numberOfLives++; Loader.numberOfPoints += 1000; Loader.map[i][j] = null;}
                 }
             }
         }
         for (Snowflake snowflake: Loader.snowflakes) {
             collisionDeath(snowflake, ball);
+        }
+        for (Ring ring: Loader.rings) {
+            collisionRing(ring, ball);
         }
         if (Loader.exit.getType() == 1) collisionRectangle(Loader.exit, ball, dt);
     }
@@ -62,14 +66,29 @@ public class Collisions {
                 ball.getSpeed().y = 0;
             }
         }
-        if (ball.overlapsLoverLeftCorner(object.getRectangle()) || ball.overlapsUpperLeftCorner(object.getRectangle())) {
-            ball.getCircle().x = ball.getCircle().x - (ball.getSpeed().x * dt + 0.25f);
-            ball.getCircle().y = ball.getCircle().y - (ball.getSpeed().y * dt + 0.25f);
-            ball.getSpeed().set(0,0);
+        if (ball.overlapsUpperLeftCorner(object.getRectangle())) {
+            if (ball.getSpeed().x == 0) {
+                ball.getCircle().x = ball.getCircle().x - (ball.getSpeed().x * dt + 0.5f);
+                ball.getCircle().y = ball.getCircle().y - (ball.getSpeed().y * dt + 0.5f);
+                ball.getSpeed().set(0, 0);
+            } else {
+                ball.getCircle().y = ball.getCircle().y + (ball.getSpeed().y * dt + 1);
+                ball.getSpeed().set(0, 0);
+            }
         }
-        if (ball.overlapsUpperRightCorner(object.getRectangle()) || ball.overlapsLoverRightCorner(object.getRectangle())) {
-            ball.getCircle().x = ball.getCircle().x + (ball.getSpeed().x * dt + 0.25f);
-            ball.getCircle().y = ball.getCircle().y + (ball.getSpeed().y * dt + 0.25f);
+        if (ball.overlapsUpperRightCorner(object.getRectangle())) {
+            if (ball.getSpeed().x == 0) {
+                ball.getCircle().x = ball.getCircle().x + (ball.getSpeed().x * dt + 0.5f);
+                ball.getCircle().y = ball.getCircle().y - (ball.getSpeed().y * dt + 0.5f);
+                ball.getSpeed().set(0, 0);
+            } else {
+                ball.getCircle().y = ball.getCircle().y + (ball.getSpeed().y * dt + 1);
+                ball.getSpeed().set(0, 0);
+            }
+        }
+        if (ball.overlapsLoverLeftCorner(object.getRectangle()) || ball.overlapsLoverRightCorner(object.getRectangle())) {
+            ball.getCircle().x = ball.getCircle().x - (ball.getSpeed().x * dt + 1f);
+            ball.getCircle().y = ball.getCircle().y - (ball.getSpeed().y * dt + 1f);
             ball.getSpeed().set(0,0);
         }
     }
@@ -80,6 +99,9 @@ public class Collisions {
             ball.getCircle().y = Loader.ballPosition.y;
             ball.getSpeed().set(0,0);
             Loader.numberOfLives--;
+            if (Loader.numberOfLives <= 0) {
+                Loader.numberOfPoints = 0;
+            }
         }
     }
 
@@ -87,6 +109,7 @@ public class Collisions {
         if (ball.overlaps(object.getRectangle())) {
             Loader.ballPosition.set(object.getRectangle().x, object.getRectangle().y);
             ((Checkpoint)object).changeState();
+            Loader.numberOfPoints += 500;
         }
     }
 
@@ -104,4 +127,12 @@ public class Collisions {
         }
     }
 
+    private void collisionRing(Ring object, Ball ball) {
+        if (ball.overlaps(object.getRectangle()) && object.getType() % 2 == 1) {
+            object.changeState();
+            Loader.numberOfRings--;
+            Loader.numberOfPoints += 500;
+            if (Loader.numberOfRings <= 0) Loader.exit.changeState();
+        }
+    }
 }

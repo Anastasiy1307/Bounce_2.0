@@ -85,6 +85,7 @@ public class Level_2 extends Level {
 
         snowflakes.add(new Snowflake(97*55,55,110,110,new Vector2(5335,55),new Vector2(220,275)));
         //...
+        rings = new ArrayList<>();
         exit = new Exit(7480, 825, 110, 110);
         ballPosition = new Vector2(500,260);
         numberOfLives = 3;

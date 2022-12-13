@@ -8,6 +8,7 @@ import com.bounce.game.GameObjects.Cutting;
 import com.bounce.game.GameObjects.Exit;
 import com.bounce.game.GameObjects.ExtraLife;
 import com.bounce.game.GameObjects.MainObject;
+import com.bounce.game.GameObjects.Ring;
 import com.bounce.game.GameObjects.Rise;
 import com.bounce.game.GameObjects.Snowflake;
 import com.bounce.game.GameObjects.Spike;
@@ -20,6 +21,7 @@ public class Loader {
     public static int levelNumber;
     public static MainObject[][] map;
     public static ArrayList<Snowflake> snowflakes;
+    public static ArrayList<Ring> rings;
     public static Exit exit;
     public static Vector2 ballPosition;
     public static int numberOfLives;
@@ -29,7 +31,7 @@ public class Loader {
     public static final int size = 55;
 
     public static void create() {
-        levelNumber = 2;
+        levelNumber = 1;
         numberOfPoints = 0;
         textures = new Texture[36];
         textures[0] = null;
@@ -92,6 +94,7 @@ public class Loader {
             }
         }
         snowflakes = level.snowflakes;
+        rings = level.rings;
         exit = level.exit;
         ballPosition = level.ballPosition;
         numberOfLives = level.numberOfLives;
