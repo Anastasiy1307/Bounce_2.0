@@ -65,6 +65,10 @@ public class Level_1 extends Level {
         rings = new ArrayList<>();
         rings.add(new Ring(9*55+12, 55+15, 30, 80, 1));
         rings.add(new Ring(33*55+12, 4*55+15, 30, 80, 1));
+        rings.add(new Ring(74*55+12, 55+15, 30, 80, 1));
+        rings.add(new Ring(82*55+12, 55+15, 30, 80, 1));
+        rings.add(new Ring(97*55+15, 3*55+12, 80, 30, 3));
+        rings.add(new Ring(101*55+15, 3*55+12, 80, 30, 3));
         //...
         exit = new Exit(6050, 55, 110, 110);
         ballPosition = new Vector2(110,330);

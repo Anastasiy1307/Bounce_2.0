@@ -30,6 +30,8 @@ public class Ring /*Кольца*/ extends MainObject{
         switch (type) {
             case 1: sb.draw(Loader.textures[31], rectangle.x, rectangle.y, rectangle.width, rectangle.height); break;
             case 2: sb.draw(Loader.textures[32], rectangle.x, rectangle.y, rectangle.width, rectangle.height); break;
+            case 3: sb.draw(Loader.textures[36], rectangle.x, rectangle.y, rectangle.width, rectangle.height); break;
+            case 4: sb.draw(Loader.textures[37], rectangle.x, rectangle.y, rectangle.width, rectangle.height); break;
         }
     }
 

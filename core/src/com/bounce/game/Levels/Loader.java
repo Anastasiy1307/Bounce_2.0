@@ -34,7 +34,7 @@ public class Loader {
     public static void create() {
         levelNumber = 1;
         numberOfPoints = 0;
-        textures = new Texture[36];
+        textures = new Texture[38];
         textures[0] = null;
         for (int i = 1; i < textures.length; i++) {
             textures[i] = new Texture(i + ".png");
