@@ -28,6 +28,7 @@ public class Level_1 extends Level {
         set(30,1,30,1,25);
         set(32,3,35,3,1);
         set(33,2,34,2,1);
+        set(33,6,34,6,1);
         set(36,1,36,1,25);
         set(38,3,41,3,1);
         set(40,1,41,2,1);
@@ -63,6 +64,7 @@ public class Level_1 extends Level {
         //...
         rings = new ArrayList<>();
         rings.add(new Ring(9*55+12, 55+15, 30, 80, 1));
+        rings.add(new Ring(33*55+12, 4*55+15, 30, 80, 1));
         //...
         exit = new Exit(6050, 55, 110, 110);
         ballPosition = new Vector2(110,330);
