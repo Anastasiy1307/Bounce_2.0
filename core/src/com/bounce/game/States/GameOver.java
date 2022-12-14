@@ -1,23 +1,29 @@
 package com.bounce.game.States;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bounce.game.Controls.Button;
+import com.bounce.game.Controls.Texture;
 import com.bounce.game.Levels.Loader;
 
-public class ChoiseLevel extends State {
+public class GameOver extends State {
 
-    Button ball;
-
-    public ChoiseLevel(GameStateManager gsm) {
+    Button Restart;
+    Texture background;
+    public GameOver(GameStateManager gsm) {
         super(gsm);
         camera.setToOrtho(false, 1080, 540);
         Loader.create();
-        ball = new Button(512, 242, 55, 55, "ball.png");
+        background = new Texture(0,0,1080, 540, "Game_over.png");
+        Restart = new Button(512, 242, 55, 55, "Button_Game_over.png");
     }
 
     @Override
     protected void handleInput() {
-        if (ball.isClick(tempDown, tempUp)) {
+        if (Gdx.input.isTouched()) {
+            gsm.set(new ChoiseLevel(gsm));
+        }
+        if (Restart.isClick(tempDown, tempUp)) {
             Loader.loadLevel();
             gsm.set(new GameState(gsm));
         }
@@ -26,7 +32,7 @@ public class ChoiseLevel extends State {
     @Override
     public void update(float dt) {
         handleInput();
-        ball.update(camera);
+        Restart.update(camera);
     }
 
     @Override
@@ -35,12 +41,15 @@ public class ChoiseLevel extends State {
         sb.setProjectionMatrix(camera.combined);
         sb.begin();
 
-        ball.draw(sb);
+        background.draw(sb);
+        sb.end();
+        Restart.draw(sb);
         sb.end();
     }
 
     @Override
     public void dispose() {
-        ball.dispose();
+        Restart.dispose();
+        background.dispose();
     }
 }
