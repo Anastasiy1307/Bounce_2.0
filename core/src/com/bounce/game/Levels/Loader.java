@@ -21,6 +21,7 @@ public class Loader {
     public static int levelNumber;
     public static MainObject[][] map;
     public static ArrayList<Snowflake> snowflakes;
+    public static ArrayList<Ring> rings;
     public static Exit exit;
     public static Vector2 ballPosition;
     public static int numberOfLives;
@@ -28,10 +29,10 @@ public class Loader {
     public static int numberOfPoints;
     public static Texture[] textures;
     public static final int size = 55;
-    public static Ring[] rings;
+
 
     public static void create() {
-        levelNumber = 3;
+        levelNumber = 1;
         numberOfPoints = 0;
         textures = new Texture[36];
         textures[0] = null;
@@ -94,6 +95,7 @@ public class Loader {
             }
         }
         snowflakes = level.snowflakes;
+        rings = level.rings;
         exit = level.exit;
         ballPosition = level.ballPosition;
         numberOfLives = level.numberOfLives;
