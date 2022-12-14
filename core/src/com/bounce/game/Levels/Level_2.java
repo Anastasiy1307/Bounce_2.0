@@ -2,6 +2,7 @@ package com.bounce.game.Levels;
 
 import com.badlogic.gdx.math.Vector2;
 import com.bounce.game.GameObjects.Exit;
+import com.bounce.game.GameObjects.Ring;
 import com.bounce.game.GameObjects.Snowflake;
 
 import java.awt.Point;
@@ -86,7 +87,17 @@ public class Level_2 extends Level {
         snowflakes.add(new Snowflake(97*55,55,110,110,new Vector2(5335,55),new Vector2(220,275)));
         //...
         rings = new ArrayList<>();
+        rings.add(new Ring(15*55+12, 5*55+15, 30, 80, 1));
+        rings.add(new Ring(41*55+12, 5*55+15, 30, 80, 1));
+        rings.add(new Ring(66*55+12, 55+15, 30, 80, 1));
+        rings.add(new Ring(92*55+12, 55+15, 30, 80, 1));
+        rings.add(new Ring(103*55+12, 3*55+15, 30, 80, 1));
+        rings.add(new Ring(114*55+12, 5*55+15, 30, 80, 1));
+        rings.add(new Ring(134*55+15, 7*55+12, 80, 30, 3));
+        rings.add(new Ring(126*55+12, 18*55+15, 30, 80, 1));
+
         exit = new Exit(7480, 825, 110, 110);
+
         ballPosition = new Vector2(500,260);
         numberOfLives = 3;
         numberOfRings = 8;

@@ -32,7 +32,7 @@ public class Loader {
 
 
     public static void create() {
-        levelNumber = 1;
+        levelNumber = 2;
         numberOfPoints = 0;
         textures = new Texture[38];
         textures[0] = null;
