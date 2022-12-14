@@ -62,6 +62,7 @@ public class Level_3 extends Level{
         set(21,28,21,31,1);
         set(22,28,23,32,1);
         set(23,28,69,28,1);
+        set(43,29,69,28,1);
         //...
         snowflakes = new ArrayList<>();
         //...

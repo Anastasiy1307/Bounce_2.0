@@ -31,7 +31,7 @@ public class Loader {
     public static Ring[] rings;
 
     public static void create() {
-        levelNumber = 2;
+        levelNumber = 3;
         numberOfPoints = 0;
         textures = new Texture[36];
         textures[0] = null;
