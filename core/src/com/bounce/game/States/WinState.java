@@ -1,20 +1,19 @@
 package com.bounce.game.States;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bounce.game.Controls.Button;
 import com.bounce.game.Controls.Texture;
 import com.bounce.game.Levels.Loader;
 
-public class WinState extends State{
+public class WinState extends State {
 
-    private Button next;
-    private Texture background;
+    private final Button next;
+    private final Texture background;
 
     public WinState(GameStateManager gsm) {
         super(gsm);
         camera.setToOrtho(false, 1080, 540);
-        background = new Texture(0,0,1080, 540, "finish.png");
+        background = new Texture(0, 0, 1080, 540, "finish.png");
         next = new Button(422, 110, 237, 77, "Button_Finish_Dalee.png");
     }
 
@@ -25,10 +24,10 @@ public class WinState extends State{
                 Loader.levelNumber++;
                 Loader.loadLevel();
                 gsm.set(new GameState(gsm));
-            } else gsm.set(new ChoiseLevel(gsm));
+            } else gsm.set(new SelectLevel(gsm));
         }
         /*if (Gdx.input.isTouched() && !next.isDown(tempDown, tempUp)) {
-            gsm.set(new ChoiseLevel(gsm));
+            gsm.set(new SelectLevel(gsm));
         }*/
     }
 

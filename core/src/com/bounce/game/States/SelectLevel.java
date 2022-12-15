@@ -5,19 +5,18 @@ import com.bounce.game.Controls.Button;
 import com.bounce.game.Controls.Texture;
 import com.bounce.game.Levels.Loader;
 
-public class ChoiseLevel extends State {
+public class SelectLevel extends State {
 
-    Button[] levels;
-    private Texture background;
+    private final Button[] levels;
+    private final Texture background;
 
-    public ChoiseLevel(GameStateManager gsm) {
+    public SelectLevel(GameStateManager gsm) {
         super(gsm);
         camera.setToOrtho(false, 1080, 540);
-        Loader.create();
-        background = new Texture(0,0,1080, 540, "Background_menu.png");
+        background = new Texture(0, 0, 1080, 540, "Background_menu.png");
         levels = new Button[11];
         for (int i = 0; i < levels.length; i++) {
-            levels[i] = new Button(275 + 150*(i%4), 330 - 125*(i/4), 76, 76, "level_" + (i+1) +".png");
+            levels[i] = new Button(275 + 150 * (i % 4), 330 - 125 * (i / 4), 76, 76, "level_" + (i + 1) + ".png");
         }
     }
 
@@ -25,7 +24,7 @@ public class ChoiseLevel extends State {
     protected void handleInput() {
         for (int i = 0; i < levels.length; i++) {
             if (levels[i].isClick(tempDown, tempUp)) {
-                Loader.levelNumber = i+1;
+                Loader.levelNumber = i + 1;
                 Loader.loadLevel();
                 gsm.set(new GameState(gsm));
             }
@@ -35,8 +34,8 @@ public class ChoiseLevel extends State {
     @Override
     public void update(float dt) {
         handleInput();
-        for (int i = 0; i < levels.length; i++) {
-            levels[i].update(camera);
+        for (Button level : levels) {
+            level.update(camera);
         }
     }
 
@@ -46,8 +45,8 @@ public class ChoiseLevel extends State {
         sb.setProjectionMatrix(camera.combined);
         sb.begin();
         background.draw(sb);
-        for (int i = 0; i < levels.length; i++) {
-            levels[i].draw(sb);
+        for (Button level : levels) {
+            level.draw(sb);
         }
         sb.end();
     }

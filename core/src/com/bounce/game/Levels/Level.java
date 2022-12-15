@@ -5,7 +5,6 @@ import com.bounce.game.GameObjects.Exit;
 import com.bounce.game.GameObjects.Ring;
 import com.bounce.game.GameObjects.Snowflake;
 
-import java.awt.Point;
 import java.util.ArrayList;
 
 public abstract class Level {

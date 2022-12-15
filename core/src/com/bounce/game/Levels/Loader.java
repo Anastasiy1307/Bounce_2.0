@@ -13,8 +13,6 @@ import com.bounce.game.GameObjects.Rise;
 import com.bounce.game.GameObjects.Snowflake;
 import com.bounce.game.GameObjects.Spike;
 import com.bounce.game.GameObjects.Triangle;
-
-import java.awt.Point;
 import java.util.ArrayList;
 
 public class Loader {

@@ -3,21 +3,23 @@ package com.bounce.game.States;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bounce.game.Controls.Texture;
+import com.bounce.game.Levels.Loader;
 
 public class StartMenu extends State {
 
-    Texture screensaver;
+    private final Texture screensaver;
 
     public StartMenu(GameStateManager gsm) {
         super(gsm);
         camera.setToOrtho(false, 1080, 540);
-        screensaver = new Texture(0,0,1080, 540, "screensaver.png");
+        screensaver = new Texture(0, 0, 1080, 540, "screensaver.png");
     }
 
     @Override
     protected void handleInput() {
         if (Gdx.input.isTouched()) {
-            gsm.set(new ChoiseLevel(gsm));
+            Loader.create();
+            gsm.set(new SelectLevel(gsm));
         }
     }
 

@@ -1,6 +1,5 @@
 package com.bounce.game.States;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bounce.game.Controls.Button;
 import com.bounce.game.Controls.Texture;
@@ -8,13 +7,13 @@ import com.bounce.game.Levels.Loader;
 
 public class GameOver extends State {
 
-    private Button restart;
-    private Texture background;
+    private final Button restart;
+    private final Texture background;
 
     public GameOver(GameStateManager gsm) {
         super(gsm);
         camera.setToOrtho(false, 1080, 540);
-        background = new Texture(0,0,1080, 540, "Game_over.png");
+        background = new Texture(0, 0, 1080, 540, "Game_over.png");
         restart = new Button(422, 110, 237, 77, "Button_Game_over.png");
     }
 
@@ -25,7 +24,7 @@ public class GameOver extends State {
             gsm.set(new GameState(gsm));
         }
         /*if (Gdx.input.isTouched() && !restart.isDown(tempDown, tempUp)) {
-            gsm.set(new ChoiseLevel(gsm));
+            gsm.set(new SelectLevel(gsm));
         }*/
     }
 

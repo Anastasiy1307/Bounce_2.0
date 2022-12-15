@@ -22,7 +22,7 @@ public class Button {
         this.texture = new com.badlogic.gdx.graphics.Texture(texture);
         this.texture.setFilter(com.badlogic.gdx.graphics.Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         rectangle = new Rectangle(x, y, width, height);
-        deltaSize = (int)Math.ceil(Math.min(width, height) / 15) / 2;
+        deltaSize = (int) Math.ceil(Math.min(width, height) / 15) / 2;
         isClick = false;
         this.x = x;
         this.y = y;
@@ -51,32 +51,6 @@ public class Button {
         return false;
     }
 
-    public boolean isDown(Vector3 touchDown, Vector3 touchUp) {
-        if (rectangle.contains(touchDown.x, touchDown.y) && !isClick) {
-            resize(-1);
-            touchUp.x = 0;
-            touchUp.y = 0;
-            touchDown.x = 0;
-            touchDown.y = 0;
-            return true;
-        }
-        if (rectangle.contains(touchUp.x, touchUp.y) && isClick) {
-            resize(1);
-            touchDown.x = 0;
-            touchDown.y = 0;
-            touchUp.x = 0;
-            touchUp.y = 0;
-            return false;
-        }
-        if (!rectangle.contains(touchUp.x, touchUp.y) && isClick && touchUp.x != 0 && touchUp.y != 0) {
-            resize(1);
-            touchDown.x = 0;
-            touchDown.y = 0;
-            return false;
-        }
-        return isClick;
-    }
-
     private void resize(int sign) {
         x -= sign * deltaSize;
         y -= sign * deltaSize;
@@ -86,8 +60,8 @@ public class Button {
     }
 
     public void update(OrthographicCamera camera) {
-        rectangle.x = camera.position.x - 540*camera.zoom + x;
-        rectangle.y = camera.position.y - 270*camera.zoom + y;
+        rectangle.x = camera.position.x - 540 * camera.zoom + x;
+        rectangle.y = camera.position.y - 270 * camera.zoom + y;
     }
 
     public void draw(SpriteBatch sb) {

@@ -8,27 +8,27 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public class Ball {
-    private Sprite texture;
-    private Sprite textureBig;
-    private Circle circle;
-    private Vector2 speed;
+    private final Sprite ball;
+    private final Texture texture;
+    private final Texture textureBig;
+    private final Circle circle;
+    private final Vector2 speed;
     private final float gravity;
     private final float friction;
     private boolean isStand;
-    private int type;
     private int degrees;
 
-    public Ball (String texture, String textureBig, float x, float y, float radius) {
-        this.texture = new Sprite(new Texture(texture), (int)radius*2, (int)radius*2);
-        this.textureBig = new Sprite(new Texture(textureBig), (int)radius*3, (int)radius*3);
-        this.texture.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        this.textureBig.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+    public Ball(String texture, String textureBig, float x, float y, float radius) {
+        this.texture = new Texture(texture);
+        this.textureBig = new Texture(textureBig);
+        this.texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        this.textureBig.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        ball = new Sprite(this.texture, (int) radius * 2, (int) radius * 2);
         circle = new Circle(x, y, radius);
-        speed = new Vector2(0,0);
+        speed = new Vector2(0, 0);
         gravity = 10;
         friction = 20;
         isStand = false;
-        type = 1;
     }
 
     public void update(float dt) {
@@ -38,13 +38,10 @@ public class Ball {
         isStand = false;
         circle.x += speed.x * dt;
         circle.y += speed.y * dt;
-        degrees = (degrees - (int)((speed.x * dt) * (360/(2*Math.PI*circle.radius)))) % 360;
-        texture.setPosition(circle.x, circle.y);
-        textureBig.setPosition(circle.x, circle.y);
-        texture.setOriginCenter();
-        textureBig.setOriginCenter();
-        texture.setRotation(degrees);
-        textureBig.setRotation(degrees);
+        degrees = (degrees - (int) ((speed.x * dt) * (360 / (2 * Math.PI * circle.radius)))) % 360;
+        ball.setPosition(circle.x, circle.y);
+        ball.setOriginCenter();
+        ball.setRotation(degrees);
     }
 
     public void moveLeft() {
@@ -63,17 +60,17 @@ public class Ball {
 
     public boolean overlaps(Rectangle rectangle) {
         return (circle.x + circle.radius > rectangle.x && circle.x + circle.radius < rectangle.x + rectangle.width &&
-                circle.y + circle.radius*2 > rectangle.y && circle.y < rectangle.y + rectangle.height) ||
-               (circle.y + circle.radius > rectangle.y && circle.y + circle.radius < rectangle.y + rectangle.height &&
-                circle.x + circle.radius*2 > rectangle.x && circle.x < rectangle.x + rectangle.width) ||
-               (circle.x + circle.radius < rectangle.x && circle.y + circle.radius < rectangle.y &&
-                Math.sqrt(Math.pow(circle.x + circle.radius - rectangle.x, 2) + Math.pow(circle.y + circle.radius - rectangle.y, 2)) < circle.radius) ||
-               (circle.x + circle.radius > rectangle.x + rectangle.width && circle.y + circle.radius < rectangle.y &&
-                Math.sqrt(Math.pow(circle.x + circle.radius - rectangle.x - rectangle.width, 2) + Math.pow(circle.y + circle.radius - rectangle.y, 2)) < circle.radius) ||
-               (circle.x + circle.radius > rectangle.x + rectangle.width && circle.y + circle.radius > rectangle.y + rectangle.height &&
-                Math.sqrt(Math.pow(circle.x + circle.radius - rectangle.x - rectangle.width, 2) + Math.pow(circle.y + circle.radius - rectangle.y - rectangle.height, 2)) < circle.radius) ||
-               (circle.x + circle.radius < rectangle.x && circle.y + circle.radius > rectangle.y + rectangle.height &&
-                Math.sqrt(Math.pow(circle.x + circle.radius - rectangle.x, 2) + Math.pow(circle.y + circle.radius - rectangle.y - rectangle.height, 2)) < circle.radius);
+                circle.y + circle.radius * 2 > rectangle.y && circle.y < rectangle.y + rectangle.height) ||
+                (circle.y + circle.radius > rectangle.y && circle.y + circle.radius < rectangle.y + rectangle.height &&
+                        circle.x + circle.radius * 2 > rectangle.x && circle.x < rectangle.x + rectangle.width) ||
+                (circle.x + circle.radius < rectangle.x && circle.y + circle.radius < rectangle.y &&
+                        Math.sqrt(Math.pow(circle.x + circle.radius - rectangle.x, 2) + Math.pow(circle.y + circle.radius - rectangle.y, 2)) < circle.radius) ||
+                (circle.x + circle.radius > rectangle.x + rectangle.width && circle.y + circle.radius < rectangle.y &&
+                        Math.sqrt(Math.pow(circle.x + circle.radius - rectangle.x - rectangle.width, 2) + Math.pow(circle.y + circle.radius - rectangle.y, 2)) < circle.radius) ||
+                (circle.x + circle.radius > rectangle.x + rectangle.width && circle.y + circle.radius > rectangle.y + rectangle.height &&
+                        Math.sqrt(Math.pow(circle.x + circle.radius - rectangle.x - rectangle.width, 2) + Math.pow(circle.y + circle.radius - rectangle.y - rectangle.height, 2)) < circle.radius) ||
+                (circle.x + circle.radius < rectangle.x && circle.y + circle.radius > rectangle.y + rectangle.height &&
+                        Math.sqrt(Math.pow(circle.x + circle.radius - rectangle.x, 2) + Math.pow(circle.y + circle.radius - rectangle.y - rectangle.height, 2)) < circle.radius);
     }
 
     public boolean overlapsLoverLeftCorner(Rectangle rectangle) {
@@ -97,12 +94,27 @@ public class Ball {
     }
 
     public void draw(SpriteBatch sb) {
-        if (type == 1) texture.draw(sb);
-        else textureBig.draw(sb);
+        ball.draw(sb);
+    }
+
+    public void stand() {
+        isStand = true;
+    }
+
+    public void setType(int type) {
+        if (type == 1) {
+            circle.radius = circle.radius / 1.5f;
+            ball.setTexture(texture);
+            ball.setSize(circle.radius * 2, circle.radius * 2);
+        } else {
+            circle.radius = circle.radius * 1.5f;
+            ball.setTexture(textureBig);
+            ball.setSize(circle.radius * 2, circle.radius * 2);
+        }
     }
 
     public void dispose() {
-        texture.getTexture().dispose();
+        ball.getTexture().dispose();
     }
 
     public Circle getCircle() {
@@ -113,19 +125,7 @@ public class Ball {
         return speed;
     }
 
-    public void stand() {
-        isStand = true;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    public Sprite getTexture() {
-        return texture;
-    }
-
-    public Sprite getTextureBig() {
-        return textureBig;
+    public Sprite getBall() {
+        return ball;
     }
 }

@@ -22,7 +22,7 @@ public class Texture {
     }
 
     public void draw(SpriteBatch sb, OrthographicCamera camera) {
-        sb.draw(texture, x + camera.position.x, y + camera.position.y, width, height);
+        sb.draw(texture, x + camera.position.x - camera.viewportWidth / 2, y + camera.position.y - camera.viewportHeight / 2, width, height);
     }
 
     public void dispose() {

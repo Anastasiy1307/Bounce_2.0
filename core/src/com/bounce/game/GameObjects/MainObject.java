@@ -8,7 +8,7 @@ public abstract class MainObject {
     protected Rectangle rectangle;
     protected int type;
 
-    public MainObject(float x, float y, float width, float height, int type){
+    public MainObject(float x, float y, float width, float height, int type) {
         rectangle = new Rectangle(x, y, width, height);
         this.type = type;
     }
