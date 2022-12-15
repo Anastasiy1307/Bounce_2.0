@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
 import com.bounce.game.Controls.Button;
 import com.bounce.game.Controls.Collisions;
 import com.bounce.game.GameObjects.Ball;
@@ -30,7 +31,7 @@ public class GameState extends State {
         ball = new Ball("ball_54x54.png", "ball_81x81.png", Loader.ballPosition.x, Loader.ballPosition.y, 27);
         collisions = new Collisions();
         left = new Button(40/camera.zoom,30/camera.zoom,82,82,"Left.png");
-        right = new Button(135/camera.zoom,30/camera.zoom,82,82,"Right.png");
+        right = new Button(145/camera.zoom,30/camera.zoom,82,82,"Right.png");
         up = new Button(925*camera.zoom,30/camera.zoom,82,82,"Up.png");
         life = new Texture("ball.png");
         life.setFilter(com.badlogic.gdx.graphics.Texture.TextureFilter.Linear, com.badlogic.gdx.graphics.Texture.TextureFilter.Linear);
@@ -47,9 +48,19 @@ public class GameState extends State {
 
     @Override
     protected void handleInput() {
-        if (left.isDown(tempDown, tempUp)) ball.moveLeft();
-        if (right.isDown(tempDown, tempUp)) ball.moveRight();
-        if (up.isDown(tempDown, tempUp)) ball.jump();
+        Vector3 touch1 = new Vector3(0,0,0);
+        Vector3 touch2 = new Vector3(0,0,0);
+        if (Gdx.input.isTouched(0)) {
+            touch1 = new Vector3(Gdx.input.getX(0), Gdx.input.getY(0), 0);
+            camera.unproject(touch1);
+        }
+        if (Gdx.input.isTouched(1)) {
+            touch2 = new Vector3(Gdx.input.getX(1), Gdx.input.getY(1), 0);
+            camera.unproject(touch2);
+        }
+        if (left.getRectangle().contains(touch1.x, touch1.y) || left.getRectangle().contains(touch2.x, touch2.y)) ball.moveLeft();
+        if (right.getRectangle().contains(touch1.x, touch1.y) || right.getRectangle().contains(touch2.x, touch2.y)) ball.moveRight();
+        if (up.getRectangle().contains(touch1.x, touch1.y) || up.getRectangle().contains(touch2.x, touch2.y)) ball.jump();
     }
 
     @Override
@@ -59,7 +70,7 @@ public class GameState extends State {
             snowflake.update(dt);
         }
         ball.update(dt);
-        collisions.checkingCollision(ball,dt);
+        collisions.checkingCollision(ball, dt, gsm);
         float offsetX = Math.max(Math.min((camera.viewportWidth/3) / Math.abs(ball.getCircle().x - camera.position.x), 3), 1.5f) * (ball.getCircle().x - camera.position.x) * dt;
         float offsetY = Math.max(Math.min((camera.viewportHeight/3) / Math.abs(ball.getCircle().y - camera.position.y), 3), 1.5f) * (ball.getCircle().y - camera.position.y) * dt;
         camera.translate(offsetX, offsetY);
@@ -95,11 +106,11 @@ public class GameState extends State {
         left.draw(sb);
         right.draw(sb);
         up.draw(sb);
-        sb.draw(life, camera.position.x - camera.viewportWidth/2 + 115, camera.position.y - camera.viewportHeight/2 + 445, 30,30);
+        sb.draw(life, camera.position.x - camera.viewportWidth/2 + 112, camera.position.y - camera.viewportHeight/2 + 442, 35,35);
         sb.draw(X, camera.position.x - camera.viewportWidth/2 + 150, camera.position.y - camera.viewportHeight/2 + 440, 30,35);
         sb.draw(numbers.get(Loader.numberOfLives), camera.position.x - camera.viewportWidth/2 + 182, camera.position.y - camera.viewportHeight/2 + 440, 30,35);
         for (int i = 0; i < Loader.numberOfRings; i++) {
-            sb.draw(ring, camera.position.x - camera.viewportWidth/2 + 220 + i*18, camera.position.y - camera.viewportHeight/2 + 445, 15,30);
+            sb.draw(ring, camera.position.x - camera.viewportWidth/2 + 220 + i*18, camera.position.y - camera.viewportHeight/2 + 446, 15,30);
         }
         sb.end();
     }

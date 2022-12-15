@@ -11,11 +11,15 @@ import com.bounce.game.GameObjects.Rise;
 import com.bounce.game.GameObjects.Snowflake;
 import com.bounce.game.GameObjects.Spike;
 import com.bounce.game.Levels.Loader;
+import com.bounce.game.States.ChoiseLevel;
+import com.bounce.game.States.GameOver;
+import com.bounce.game.States.GameStateManager;
+import com.bounce.game.States.WinState;
 
 public class Collisions {
 
     // В процессе...
-    public void checkingCollision(Ball ball, float dt) {
+    public void checkingCollision(Ball ball, float dt, GameStateManager gsm) {
         int begin_i = Math.min(Math.max((int)(ball.getCircle().x) / 55 - 2, 0), Loader.map.length - 1);
         int end_i = Math.max(Math.min((int)(ball.getCircle().x) / 55 + 2, Loader.map.length - 1), 0);
         int begin_j = Math.min(Math.max((int)(ball.getCircle().y) / 55 - 2, 0), Loader.map[0].length - 1);
@@ -24,7 +28,7 @@ public class Collisions {
             for (int j = begin_j; j <= end_j; j++) {
                 if (Loader.map[i][j] != null) {
                     if (Loader.map[i][j] instanceof Block) collisionRectangle(Loader.map[i][j], ball, dt);
-                    if (Loader.map[i][j] instanceof Spike) collisionDeath(Loader.map[i][j], ball);
+                    if (Loader.map[i][j] instanceof Spike) collisionDeath(Loader.map[i][j], ball, gsm);
                     if (Loader.map[i][j] instanceof Checkpoint && Loader.map[i][j].getType() == 1) collisionCheckpoint(Loader.map[i][j], ball);
                     if (Loader.map[i][j] instanceof Rise) { collisionRise(Loader.map[i][j], ball); collisionRectangle(Loader.map[i][j], ball, dt);}
                     if (Loader.map[i][j] instanceof Cutting) { collisionCutting(Loader.map[i][j], ball); collisionRectangle(Loader.map[i][j], ball, dt);}
@@ -33,12 +37,13 @@ public class Collisions {
             }
         }
         for (Snowflake snowflake: Loader.snowflakes) {
-            collisionDeath(snowflake, ball);
+            collisionDeath(snowflake, ball, gsm);
         }
         for (Ring ring: Loader.rings) {
             collisionRing(ring, ball);
         }
         if (Loader.exit.getType() == 1) collisionRectangle(Loader.exit, ball, dt);
+        else if (ball.overlaps(Loader.exit.getRectangle())) gsm.set(new WinState(gsm));
     }
 
     private void collisionRectangle(MainObject object, Ball ball, float dt) {
@@ -93,7 +98,7 @@ public class Collisions {
         }
     }
 
-    private void collisionDeath(MainObject object, Ball ball) {
+    private void collisionDeath(MainObject object, Ball ball, GameStateManager gsm) {
         if (ball.overlaps(object.getRectangle())) {
             ball.getCircle().x = Loader.ballPosition.x;
             ball.getCircle().y = Loader.ballPosition.y;
@@ -101,6 +106,7 @@ public class Collisions {
             Loader.numberOfLives--;
             if (Loader.numberOfLives <= 0) {
                 Loader.numberOfPoints = 0;
+                gsm.set(new GameOver(gsm));
             }
         }
     }
