@@ -79,7 +79,7 @@ public class Loader {
                     case 18: map[i][j] = new Rise(i*size, j*size+15, size, 26, 2); break;
                     case 19: map[i][j] = new Rise(i*size+15, j*size, 26, size, 3); break;
                     case 20: map[i][j] = new Rise(i*size, j*size+15, size, 26, 4); break;
-                    case 21: map[i][j] = new Cutting(i*size+12, j*size, 31, size, 1); break;
+                    case 21: map[i][j] = new Cutting(i*size, j*size, size, size, 1); break;
                     case 22: map[i][j] = new Cutting(i*size, j*size+12, size, 31, 2); break;
                     case 23: map[i][j] = new Cutting(i*size+12, j*size, 31, size, 3); break;
                     case 24: map[i][j] = new Cutting(i*size, j*size+12, size, 31, 4); break;
