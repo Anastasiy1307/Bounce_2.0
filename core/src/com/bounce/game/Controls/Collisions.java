@@ -10,6 +10,7 @@ import com.bounce.game.GameObjects.Ring;
 import com.bounce.game.GameObjects.Rise;
 import com.bounce.game.GameObjects.Snowflake;
 import com.bounce.game.GameObjects.Spike;
+import com.bounce.game.GameObjects.Triangle;
 import com.bounce.game.Levels.Loader;
 import com.bounce.game.States.GameOver;
 import com.bounce.game.States.GameStateManager;
@@ -27,6 +28,8 @@ public class Collisions {
                 if (Loader.map[i][j] != null) {
                     if (Loader.map[i][j] instanceof Block)
                         collisionRectangle(Loader.map[i][j], ball, dt);
+                    if (Loader.map[i][j] instanceof Triangle)
+                        collisionTriangle(Loader.map[i][j], ball, dt);
                     if (Loader.map[i][j] instanceof Spike)
                         collisionDeath(Loader.map[i][j], ball, gsm);
                     if (Loader.map[i][j] instanceof Checkpoint && Loader.map[i][j].getType() == 1)
@@ -107,6 +110,24 @@ public class Collisions {
             ball.getCircle().y = ball.getCircle().y - (ball.getSpeed().y * dt + 1f);
             ball.getBall().setPosition(ball.getCircle().x, ball.getCircle().y);
             ball.getSpeed().set(0, 0);
+        }
+    }
+
+    private void collisionTriangle(MainObject object, Ball ball, float dt) {
+        if (ball.overlaps(object.getRectangle())) {
+            if (object.getType() == 1 && ball.getCircle().x+ball.getCircle().radius*2 - object.getRectangle().x - 15 > ball.getCircle().y-object.getRectangle().y) {
+                ball.getCircle().x += (ball.getCircle().y-object.getRectangle().y) - (ball.getCircle().x+ball.getCircle().radius*2 - object.getRectangle().x - 15);
+                ball.getBall().setX(ball.getCircle().x);
+                ball.getSpeed().set(ball.getSpeed().x/1.1f, ball.getSpeed().x/1.1f);
+                ball.stand();
+            }
+            // исправить
+            if (object.getType() == 2 && ball.getCircle().x - object.getRectangle().x + 15 < ball.getCircle().y-object.getRectangle().y) {
+                ball.getCircle().x += (ball.getCircle().y-object.getRectangle().y) - (ball.getCircle().x - object.getRectangle().x + 15);
+                ball.getBall().setX(ball.getCircle().x);
+                ball.getSpeed().set(ball.getSpeed().x/1.1f, -ball.getSpeed().x/1.1f);
+                ball.stand();
+            }
         }
     }
 
