@@ -46,14 +46,14 @@ public class Loader {
             case 1: level = new Level_1(); break;
             case 2: level = new Level_2(); break;
             case 3: level = new Level_3(); break;
-            /*case 4: level = new Level_4(); break;
+            case 4: level = new Level_4(); break;
             case 5: level = new Level_5(); break;
             case 6: level = new Level_6(); break;
             case 7: level = new Level_7(); break;
             case 8: level = new Level_8(); break;
             case 9: level = new Level_9(); break;
             case 10: level = new Level_10(); break;
-            case 11: level = new Level_11(); break;*/
+            case 11: level = new Level_11(); break;
         }
 
         map = new MainObject[level.map.length][level.map[0].length];
